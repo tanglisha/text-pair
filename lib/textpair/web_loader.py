@@ -227,6 +227,7 @@ def load_db(file, source_metadata, target_metadata, table_name, searchable_field
     config = configparser.ConfigParser()
     config.read("/etc/text-pair/global_settings.ini")
     database = psycopg2.connect(
+        port=config["DATABASE"]["database_port"],
         user=config["DATABASE"]["database_user"],
         password=config["DATABASE"]["database_password"],
         database=config["DATABASE"]["database_name"],
@@ -356,6 +357,7 @@ def load_groups_file(groups_file: str, alignments_table: str, searchable_fields:
     searchable_fields = [f for f in searchable_fields if f in field_names and f != "group_id"]
 
     database = psycopg2.connect(
+        port=config["DATABASE"]["database_port"],
         user=config["DATABASE"]["database_user"],
         password=config["DATABASE"]["database_password"],
         database=config["DATABASE"]["database_name"],
@@ -401,6 +403,7 @@ def generate_database_stats(table_name, algorithm):
     config = configparser.ConfigParser()
     config.read("/etc/text-pair/global_settings.ini")
     database = psycopg2.connect(
+        port=config["DATABASE"]["database_port"],
         user=config["DATABASE"]["database_user"],
         password=config["DATABASE"]["database_password"],
         database=config["DATABASE"]["database_name"],

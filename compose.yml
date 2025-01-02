@@ -1,0 +1,33 @@
+services: 
+  textpair:
+    container_name: text-pair
+    build:
+      context: .
+    network_mode: host
+    ports:
+      - target: 80 # container
+        published: 80 # host
+    volumes:
+      - .:/var/lib/text-pair
+      - ./source:/source
+      - ./output:/output
+      - ./postgres-data:/var/lib/postgresql/data
+
+# for the container
+# docker build .
+# docker compose run textpair /bin/bash
+
+# 1. init_textpair_db
+# 2: textpair --config /var/lib/text-pair/config/config.ini --debug textpair --output_path /output
+
+# The text_parser file is located in /var/lib/text-pair/textpair_env/lib/python3.10/site-packages/textpair/text_parser.py
+
+
+# textpair finished message:
+# ### Finished ###
+# The database is viewable at this URL: http://localhost/text-pair/textpair
+# To configure the web application, edit /var/www/html/text-pair/textpair/appConfig.json and run 'npm run build' from the /var/www/html/text-pair/textpair directory
+
+# find all references to output/source/metadata/metadata.json    and make them absolute
+
+# eltec took 9 and a half hours on this machine

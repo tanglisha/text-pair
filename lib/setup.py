@@ -16,7 +16,7 @@ dependencies = [
     "lz4",
     "orjson",
     "text_preprocessing @ git+https://github.com/ARTFL-Project/text-preprocessing@v1.1.0.1#egg=text_preprocessing",
-    "fastapi==0.110.3",
+    "fastapi[standard]==0.115.6",
     "psycopg2",
     "gunicorn",
     "uvicorn",

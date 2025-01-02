@@ -21,6 +21,7 @@ Common shingles across texts indicate many different types of textual borrowings
 The recommended install is to build your own Docker image and run TextPAIR inside a container.
 
 ### Docker container method
+#### Vanilla Docker
 
 -   Go to the docker folder and build a docker image: `docker build -t textpair .`
 -   Start a new container: `docker run -td -p 80:80 --name textpair artfl/textpair init_textpair_db`
@@ -29,6 +30,25 @@ The recommended install is to build your own Docker image and run TextPAIR insid
 
 If you do run into the issue where the web server does not respond, restart the web server with the following command:
 `/var/lib/text-pair/api_server/web_server.sh &`
+
+#### Docker compose
+1. Add your source files to a directory named `source` in the project root.
+2. Download and build the image: `docker compose build textpair`
+3. Start up the container: `docker compose up -d textpair`
+3. Enter the container with a bash terminal: `docker compose run textpair /bin/bash`
+4. Run the textpair command: `textpair --config /var/lib/text-pair/config/config.ini textpair --output_path /output`
+    1. Add `--debug` to the end of that command if you'd like to see everything that it happens.
+
+To stop the container, run `docker compose down textpair` from outside of the container.
+
+You now have two resources published to the host.
+##### Graphical web interface
+http://localhost/text-pair/textpair/
+
+##### API
+http://localhost/docs
+
+If the API is not available, run 
 
 ### Manual installation
 

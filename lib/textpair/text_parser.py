@@ -10,6 +10,7 @@ from philologic.loadtime.Loader import Loader, setup_db_dir
 
 PHILO_TEXT_OBJECT_LEVELS = {"doc": 1, "div1": 2, "div2": 3, "div3": 4, "para": 5, "sent": 6, "word": 7}
 
+print("lib/text-pair/text_parser.py")
 
 def parse_files(
     input_file_path: str,
@@ -86,13 +87,13 @@ def parse_files(
             }
         )
     loader.tables = ["toms"]  # We just want the toms (metadata) table.
-    loader.add_files([f.path for f in os.scandir(input_file_path)])
+    loader.add_files([os.path.join(root, name) for root, _, files in os.walk(input_file_path) for name in files])
     if metadata != "":
         doc_metadata = loader.parse_bibliography_file(metadata, ["year", "author", "title", "filename"])
     else:
         doc_metadata = loader.parse_metadata(["year", "author", "title", "filename"], header="tei", verbose=False)
     loader.set_file_data(doc_metadata, loader.textdir, loader.workdir)
-    loader.parse_files(workers, verbose=False)
+    loader.parse_files(workers, verbose=True)
     loader.merge_files("toms", verbose=False)
     loader.setup_sql_load(verbose=False)
     loader.post_processing(verbose=False)
