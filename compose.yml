@@ -12,6 +12,7 @@ services:
       - ./source:/source
       - ./output:/output
       - ./postgres-data:/var/lib/postgresql/data
+      - # todo: link to config
 
 # for the container
 # docker build .
@@ -31,3 +32,11 @@ services:
 # find all references to output/source/metadata/metadata.json    and make them absolute
 
 # eltec took 9 and a half hours on this machine
+
+# If the virtualenv is not created
+"""
+virtualenv -p $PYTHON_VERSION /var/lib/text-pair/textpair_env
+source /var/lib/text-pair/textpair_env/bin/activate
+pip3 install lib/."""
+
+# use time to run the command if you want to know how long it took

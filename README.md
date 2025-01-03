@@ -21,6 +21,8 @@ Common shingles across texts indicate many different types of textual borrowings
 The recommended install is to build your own Docker image and run TextPAIR inside a container.
 
 ### Docker container method
+* Requires docker to be installed
+doc
 #### Vanilla Docker
 
 -   Go to the docker folder and build a docker image: `docker build -t textpair .`
